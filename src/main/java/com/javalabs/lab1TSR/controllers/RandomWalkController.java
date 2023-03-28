@@ -1,16 +1,18 @@
 package com.javalabs.lab1TSR.controllers;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javalabs.lab1TSR.counter.RequestCounter;
 import com.javalabs.lab1TSR.records.RandomWalk;
+import com.javalabs.lab1TSR.records.RandomWalkBulkResponse;
 import com.javalabs.lab1TSR.records.RandomWalkRequest;
 
+import com.javalabs.lab1TSR.records.StatisticsMapper;
 import com.javalabs.lab1TSR.repository.RandomWalkBasicRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 
 
@@ -37,6 +39,13 @@ public class RandomWalkController {
         body.forEach((element) -> result.add(
                 repository.get(element)
         ));
-        return new ResponseEntity<>(result, HttpStatus.OK);
+
+        StatisticsMapper stats = new StatisticsMapper(result.stream()
+                .map((x) -> x.randomWalk)
+                .collect(IntSummaryStatistics::new,
+                        IntSummaryStatistics::accept,
+                        IntSummaryStatistics::combine));
+
+        return new ResponseEntity<>(new RandomWalkBulkResponse(stats, result), HttpStatus.OK);
     }
 }

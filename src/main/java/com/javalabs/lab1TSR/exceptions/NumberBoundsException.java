@@ -10,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class NumberBoundsException extends RuntimeException{
 
-    private final Logger logger = LogManager.getLogger(LogBuilder.class);
+    private final Logger logger = LogManager.getLogger(NumberBoundsException.class);
 
     public NumberBoundsException(){
         super();

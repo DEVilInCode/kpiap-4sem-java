@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 public class NaNException extends RuntimeException {
 
-    private final Logger logger = LogManager.getLogger(LogBuilder.class);
+    private final Logger logger = LogManager.getLogger(NaNException.class);
 
     public NaNException(){
         super();
