@@ -41,7 +41,7 @@ public class RandomWalkController {
         ));
 
         StatisticsMapper stats = new StatisticsMapper(result.stream()
-                .map((x) -> x.randomWalk)
+                .map(RandomWalk::value)
                 .collect(IntSummaryStatistics::new,
                         IntSummaryStatistics::accept,
                         IntSummaryStatistics::combine));

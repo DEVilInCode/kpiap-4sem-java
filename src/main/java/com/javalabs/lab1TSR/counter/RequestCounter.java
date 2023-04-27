@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class RequestCounter {
 
-    private AtomicInteger count;
+    private final AtomicInteger count;
     private static final Logger logger = LogManager.getLogger(RequestCounter.class);
 
     public RequestCounter(){

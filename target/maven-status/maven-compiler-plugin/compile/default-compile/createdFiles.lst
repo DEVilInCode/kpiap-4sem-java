@@ -1,9 +1,11 @@
-com\javalabs\lab1TSR\records\RandomWalkBulkResponse.class
-com\javalabs\lab1TSR\records\StatsMapper.class
-com\javalabs\lab1TSR\Lab1TsrApplication.class
-com\javalabs\lab1TSR\records\RandomWalk.class
 com\javalabs\lab1TSR\exceptions\NaNException.class
-com\javalabs\lab1TSR\repository\RandomWalkBasicRepository.class
+com\javalabs\lab1TSR\repository\RandomWalkEntityRepository.class
+com\javalabs\lab1TSR\counter\RequestCounter.class
+com\javalabs\lab1TSR\records\StatisticsMapper.class
 com\javalabs\lab1TSR\exceptions\NumberBoundsException.class
 com\javalabs\lab1TSR\records\RandomWalkRequest.class
+com\javalabs\lab1TSR\Lab1TsrApplication.class
+com\javalabs\lab1TSR\records\RandomWalk.class
+com\javalabs\lab1TSR\repository\RandomWalkBasicRepository.class
+com\javalabs\lab1TSR\entity\RandomWalkEntity.class
 com\javalabs\lab1TSR\controllers\RandomWalkController.class
