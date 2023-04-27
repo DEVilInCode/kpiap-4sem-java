@@ -20,7 +20,7 @@ public class RandomWalkEntity {
     }
 
     public RandomWalkEntity(RandomWalkRequest request){
-        this.value = new RandomWalk(request.number()).value();
+        this.value = request.getRandomWalk().value();//new RandomWalk(request.number()).value();
         this.randomWalk = request.getRandomWalk().randomWalk();
     }
 

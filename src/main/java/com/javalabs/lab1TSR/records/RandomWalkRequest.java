@@ -1,8 +1,18 @@
 package com.javalabs.lab1TSR.records;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+public class RandomWalkRequest {
 
-public record RandomWalkRequest(@JsonProperty("num") String number) {
+    private double number;
+
+    public double number(){
+        return this.number;
+    }
+    public RandomWalkRequest(int number) {
+        this.number = number;
+    }
+    public RandomWalkRequest(double num){
+        this.number = num;
+    }
 
     public RandomWalk getRandomWalk(){
         return new RandomWalk(number);

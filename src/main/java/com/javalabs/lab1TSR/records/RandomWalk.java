@@ -1,5 +1,7 @@
 package com.javalabs.lab1TSR.records;
 
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.javalabs.lab1TSR.entity.RandomWalkEntity;
 import com.javalabs.lab1TSR.exceptions.NaNException;
 import com.javalabs.lab1TSR.exceptions.NumberBoundsException;
@@ -8,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
 
+@JsonSerialize(using = RandomWalkSerializer.class)
 public class RandomWalk {
 
     private static final Logger logger = LogManager.getLogger(RandomWalk.class);
@@ -23,12 +26,15 @@ public class RandomWalk {
         return this.randomWalk;
     }
 
-    public RandomWalk(String number){
+    public RandomWalk(double number){
 
-        if(!number.matches("[+-]?\\d+"))
+        if(Double.isInfinite(number))
+            throw new NaNException("Infinite");
+
+        if(Double.isNaN(number))
             throw new NaNException("NaN");
 
-        int parsedNum = Integer.parseInt(number);
+        int parsedNum = (int)number;
         if(parsedNum < 1 || parsedNum > 10)
             throw new NumberBoundsException(String.format("Number not in bounds: %d", parsedNum));
 
