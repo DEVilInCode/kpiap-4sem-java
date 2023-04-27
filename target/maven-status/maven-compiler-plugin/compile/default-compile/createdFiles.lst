@@ -1,3 +1,4 @@
+com\javalabs\lab1TSR\records\RandomWalkSerializer.class
 com\javalabs\lab1TSR\exceptions\NaNException.class
 com\javalabs\lab1TSR\repository\RandomWalkEntityRepository.class
 com\javalabs\lab1TSR\counter\RequestCounter.class
