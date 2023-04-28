@@ -21,13 +21,13 @@ public class RandomWalkBasicRepository{
     @Cacheable("value")
     public RandomWalk get(RandomWalkRequest parametrs) {
 
-        RandomWalkEntity randomWalkEntity = repository.findEntityByValue(parametrs.getRandomWalk().value());
+        RandomWalkEntity randomWalkEntity = repository.findEntityByValue((int)parametrs.value());
         if(randomWalkEntity == null){
-            randomWalkEntity = new RandomWalkEntity(parametrs);
-            repository.save(randomWalkEntity);
+            repository.save(new RandomWalkEntity(parametrs));
             logger.info("RandomWalk saved in database");
             logger.info("RandomWalk cached");
+            randomWalkEntity = repository.findEntityByValue((int)parametrs.value());
         }
-        return parametrs.getRandomWalk();
+        return new RandomWalk(randomWalkEntity.value(), randomWalkEntity.randomWalk());
     }
 }

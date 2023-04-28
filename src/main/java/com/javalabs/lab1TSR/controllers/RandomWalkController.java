@@ -29,6 +29,7 @@ public class RandomWalkController {
     @GetMapping("/walk")
     public RandomWalk randomWalk(@RequestParam(value = "num", defaultValue = "5") double number){
         counter.increment();
+        //repository.get(new RandomWalkRequest(number));
         return repository.get(new RandomWalkRequest(number));
     }
 

@@ -2,19 +2,19 @@ package com.javalabs.lab1TSR.records;
 
 public class RandomWalkRequest {
 
-    private double number;
+    private double value;
 
-    public double number(){
-        return this.number;
+    public double value(){
+        return this.value;
     }
-    public RandomWalkRequest(int number) {
-        this.number = number;
+    public RandomWalkRequest(int value) {
+        this.value = value;
     }
-    public RandomWalkRequest(double num){
-        this.number = num;
+    public RandomWalkRequest(double value){
+        this.value = value;
     }
 
     public RandomWalk getRandomWalk(){
-        return new RandomWalk(number);
+        return new RandomWalk(value);
     }
 }

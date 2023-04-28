@@ -26,6 +26,11 @@ public class RandomWalk {
         return this.randomWalk;
     }
 
+    public RandomWalk(int value, int randomWalk){
+        this.value = value;
+        this.randomWalk = randomWalk;
+    }
+
     public RandomWalk(double number){
 
         if(Double.isInfinite(number))

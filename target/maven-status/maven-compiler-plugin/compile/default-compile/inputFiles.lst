@@ -1,12 +1,13 @@
+C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\records\RandomWalkSerializer.java
 C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\repository\RandomWalkBasicRepository.java
 C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\records\RandomWalkBulkResponse.java
 C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\records\RandomWalk.java
 C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\repository\RandomWalkEntityRepository.java
 C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\controllers\RandomWalkController.java
+C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\records\StatisticsMapper.java
+C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\counter\RequestCounter.java
 C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\records\RandomWalkRequest.java
 C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\entity\RandomWalkEntity.java
 C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\exceptions\NumberBoundsException.java
-C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\records\StatisticsMapper.java
-C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\counter\RequestCounter.java
 C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\Lab1TsrApplication.java
 C:\Users\DEVil\Desktop\kpiap-4sem-java\src\main\java\com\javalabs\lab1TSR\exceptions\NaNException.java
