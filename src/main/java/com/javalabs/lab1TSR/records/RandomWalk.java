@@ -1,6 +1,5 @@
 package com.javalabs.lab1TSR.records;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.javalabs.lab1TSR.entity.RandomWalkEntity;
 import com.javalabs.lab1TSR.exceptions.NaNException;
@@ -18,11 +17,11 @@ public class RandomWalk {
     private final int value;
     private final int randomWalk;
 
-    public int value(){
+    public int getValue(){
         return this.value;
     }
 
-    public int randomWalk(){
+    public int getRandomWalk(){
         return this.randomWalk;
     }
 
@@ -40,20 +39,20 @@ public class RandomWalk {
             throw new NaNException("NaN");
 
         int parsedNum = (int)number;
-        if(parsedNum < 1 || parsedNum > 10)
+        if(parsedNum < 1 || parsedNum > 10000)
             throw new NumberBoundsException(String.format("Number not in bounds: %d", parsedNum));
 
         this.value = parsedNum;
-        this.randomWalk = GetRandomWalk(parsedNum);
-        logger.info("RandomWalk succeed");
+        this.randomWalk = CreateRandomWalk(parsedNum);
+        //logger.info("RandomWalk succeed");
     }
 
     public RandomWalk(RandomWalkEntity entity){
-        this.value = entity.value();
-        this.randomWalk = entity.randomWalk();
+        this.value = entity.getValue();
+        this.randomWalk = entity.getRandomWalk();
     }
 
-    private int GetRandomWalk(int number) {
+    private int CreateRandomWalk(int number) {
         return new Random().nextInt(number);
     }
 }

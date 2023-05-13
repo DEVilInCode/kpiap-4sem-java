@@ -11,12 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 
 @RestController
+@RequestMapping("/walk")
 public class RandomWalkController {
     private final RandomWalkBasicRepository repository;
     private final RequestCounter counter;
@@ -26,27 +28,38 @@ public class RandomWalkController {
         this.counter = counter;
     }
 
-    @GetMapping("/walk")
-    public RandomWalk randomWalk(@RequestParam(value = "num", defaultValue = "5") double number){
+    @GetMapping
+    public ResponseEntity<RandomWalk> randomWalk(@RequestParam(value = "num", defaultValue = "5") double number){
         counter.increment();
-        //repository.get(new RandomWalkRequest(number));
-        return repository.get(new RandomWalkRequest(number));
+        RandomWalk randomWalk = repository.get(new RandomWalkRequest(number));
+        return new ResponseEntity<>(randomWalk, HttpStatus.OK);
     }
 
-    @PostMapping("/walk")
-    public ResponseEntity<?> randomWalkBulk(@RequestBody List<RandomWalkRequest> body) {
+    @PutMapping("/bulk")
+    public ResponseEntity<RandomWalkBulkResponse> randomWalkBulk(@RequestBody List<RandomWalkRequest> requests) {
         counter.increment();
-        List<RandomWalk> result = new ArrayList<>();
-        body.forEach((element) -> result.add(
-                repository.get(element)
-        ));
+        List<RandomWalk> walks = requests.parallelStream()
+                .map(repository::get)
+                .collect(Collectors.toList());
 
-        StatisticsMapper stats = new StatisticsMapper(result.stream()
-                .map(RandomWalk::value)
-                .collect(IntSummaryStatistics::new,
-                        IntSummaryStatistics::accept,
-                        IntSummaryStatistics::combine));
+        IntSummaryStatistics statistics = walks.stream()
+                .mapToInt(RandomWalk::getValue)
+                .summaryStatistics();
 
-        return new ResponseEntity<>(new RandomWalkBulkResponse(stats, result), HttpStatus.OK);
+        StatisticsMapper mapper = new StatisticsMapper(statistics);
+        RandomWalkBulkResponse response = new RandomWalkBulkResponse(mapper, walks);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PatchMapping("/bulk")
+    public ResponseEntity<?> randomWalkAsync(@RequestBody List<RandomWalkRequest> requests) {
+        counter.increment();
+        List<CompletableFuture<Void>> futures = requests.parallelStream()
+                .map(request -> CompletableFuture.runAsync(() -> repository.get(request))).toList();
+
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

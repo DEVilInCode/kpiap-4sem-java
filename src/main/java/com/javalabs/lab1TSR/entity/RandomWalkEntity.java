@@ -1,38 +1,51 @@
 package com.javalabs.lab1TSR.entity;
 
-import com.javalabs.lab1TSR.records.RandomWalk;
 import com.javalabs.lab1TSR.records.RandomWalkRequest;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "random_walk_cache")
 public class RandomWalkEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private long id;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
+    @Column(name = "value", nullable = false, unique = true)
     private int value;
+
+    @Column(name = "random_walk", nullable = false)
     private int randomWalk;
 
-    protected RandomWalkEntity(){
+    public RandomWalkEntity() {}
+
+    public RandomWalkEntity(RandomWalkRequest request) {
+        this.value = (int)request.value();
+        this.randomWalk = request.getRandomWalk().getRandomWalk();
     }
 
-    public RandomWalkEntity(RandomWalkRequest request){
+    public void update(RandomWalkRequest request) {
         this.value = (int)request.value();
-        this.randomWalk = request.getRandomWalk().randomWalk();
+        this.randomWalk = request.getRandomWalk().getRandomWalk();
     }
 
     public boolean equal(RandomWalkEntity a, RandomWalkEntity b){
-        return (a.value == b.value) && (a.randomWalk == b.randomWalk);
+        return (a.value == b.value && a.randomWalk == b.randomWalk);
     }
 
-    public int value(){
+    public int getValue(){
         return this.value;
     }
 
-    public int randomWalk(){
+    public int getRandomWalk(){
         return this.randomWalk;
+    }
+
+    public void setRandomWalk(int randomWalk){
+        this.randomWalk = randomWalk;
     }
 }

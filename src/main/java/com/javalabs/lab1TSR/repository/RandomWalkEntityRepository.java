@@ -2,14 +2,17 @@ package com.javalabs.lab1TSR.repository;
 
 import com.javalabs.lab1TSR.entity.RandomWalkEntity;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface RandomWalkEntityRepository extends CrudRepository<RandomWalkEntity, Long>{
+public interface RandomWalkEntityRepository extends JpaRepository<RandomWalkEntity, Integer> {
 
-    RandomWalkEntity getEntityById(long id);
+    Optional<RandomWalkEntity> getEntityById(long id);
 
-    RandomWalkEntity findEntityByValue(int value);
+    Optional<RandomWalkEntity>  findEntityByValue(int value);
 
 }

@@ -7,9 +7,7 @@ public class RandomWalkRequest {
     public double value(){
         return this.value;
     }
-    public RandomWalkRequest(int value) {
-        this.value = value;
-    }
+
     public RandomWalkRequest(double value){
         this.value = value;
     }
