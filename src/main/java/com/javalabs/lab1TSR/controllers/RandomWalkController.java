@@ -7,6 +7,7 @@ import com.javalabs.lab1TSR.records.RandomWalkRequest;
 
 import com.javalabs.lab1TSR.records.StatisticsMapper;
 import com.javalabs.lab1TSR.repository.RandomWalkBasicRepository;
+import jakarta.persistence.GeneratedValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,21 @@ public class RandomWalkController {
     }
 
     @GetMapping
-    public ResponseEntity<RandomWalk> randomWalk(@RequestParam(value = "num", defaultValue = "5") double number){
+    public ResponseEntity<RandomWalk> randomWalk(@RequestParam(value = "value", defaultValue = "5") double number){
         counter.increment();
         RandomWalk randomWalk = repository.get(new RandomWalkRequest(number));
         return new ResponseEntity<>(randomWalk, HttpStatus.OK);
     }
 
-    @PutMapping("/bulk")
+    @GetMapping("/requests")
+    public int randomWalkRequestCount(@RequestParam(value = "command", defaultValue = "count") String command){
+        if(command.equals("count"))
+            return counter.count();
+
+        return -1;
+    }
+
+    @PostMapping("/bulk")
     public ResponseEntity<RandomWalkBulkResponse> randomWalkBulk(@RequestBody List<RandomWalkRequest> requests) {
         counter.increment();
         List<RandomWalk> walks = requests.parallelStream()

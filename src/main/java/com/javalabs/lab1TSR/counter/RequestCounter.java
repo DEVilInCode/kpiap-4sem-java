@@ -17,7 +17,7 @@ public class RequestCounter {
     }
 
     public synchronized void increment(){
-        logger.info(String.format("Requests count: %d", count.incrementAndGet()));
+        count.incrementAndGet();
     }
 
     public synchronized int count(){
